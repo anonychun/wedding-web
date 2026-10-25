@@ -1,0 +1,6 @@
+{
+  "ignorePatterns": [],
+  "svelte": true,
+  "tabWidth": 2,
+  "semi": false
+}
