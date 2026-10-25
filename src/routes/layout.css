@@ -1,1 +1,36 @@
 @import "tailwindcss";
+
+@theme {
+  --font-mono: "Courier Prime", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-script: "Homemade Apple", cursive;
+  --color-paper: #f6f6f5;
+  --color-ink: #1f1f1f;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  scroll-behavior: smooth;
+}
+
+/* Strip of translucent "tape" holding photos onto the page */
+.tape {
+  position: absolute;
+  left: 50%;
+  top: -0.9rem;
+  height: 2rem;
+  width: 45%;
+  max-width: 11rem;
+  translate: -50% 0;
+  background: rgb(230 230 228 / 0.85);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  z-index: 1;
+}
+
+.label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
