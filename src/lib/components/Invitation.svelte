@@ -45,6 +45,29 @@
   }
 </script>
 
+{#snippet instagram(handle: string)}
+  <a
+    href="https://www.instagram.com/{handle}/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-4 inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      class="size-3.5"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+    </svg>
+    @{handle}
+  </a>
+{/snippet}
+
 <div class="mx-auto max-w-5xl overflow-x-clip px-5 pb-24 text-[13px] leading-relaxed sm:px-10">
   <!-- Header -->
   <header class="flex flex-col gap-8 py-8 sm:flex-row sm:items-start sm:justify-between">
@@ -94,9 +117,10 @@
           <p class="label mb-1">Kepada Yth.</p>
           <p class="mb-4 text-base font-bold">{guest.name}</p>
         {/if}
+        <p class="mb-2 italic">Assalamu'alaikum Warohmatullahi Wabarokatuh</p>
         <p>
-          Kami akan menikah! Dengan penuh sukacita, kami mengundang Anda untuk hadir dan merayakan
-          hari bahagia kami bersama.
+          Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara
+          pernikahan kami.
         </p>
       </div>
       <div class="font-script -rotate-6 text-center text-lg sm:pr-10">
@@ -104,99 +128,88 @@
         <p>{couple.groom.nickname} &amp; {couple.bride.nickname}</p>
       </div>
     </div>
-    <p class="border-t border-neutral-100 px-4 py-4 text-center text-[11px] sm:px-6">
-      {couple.groom.fullName} &nbsp;·&nbsp; {couple.bride.fullName}
-    </p>
   </section>
 
-  <!-- Details -->
+  <!-- Groom -->
   <section class="mt-28 grid items-center gap-14 sm:grid-cols-[1fr_auto]">
-    <div class="order-2 space-y-14 sm:order-1 sm:pl-10">
-      <div class="grid grid-cols-[6rem_1fr] gap-4">
-        <p class="label pt-0.5">Susunan Acara</p>
-        <ul>
-          {#each wedding.itinerary as item (item.time)}
-            <li>{item.time} ........ {item.label}</li>
-          {/each}
-        </ul>
-      </div>
-      <div class="grid grid-cols-[6rem_1fr] gap-4">
-        <p class="label pt-0.5">Busana</p>
-        <div>
-          {#each wedding.attire as line, i (i)}
-            <p>{line}</p>
-          {/each}
-        </div>
-      </div>
+    <div class="order-2 text-center sm:order-1 sm:pl-10 sm:text-left">
+      <p class="label mb-3">Mempelai Pria</p>
+      <p class="text-lg font-bold">{couple.groom.fullName}</p>
+      <p class="mt-4">{couple.groom.childOrder}</p>
+      <p>{couple.groom.parents}</p>
+      {@render instagram(couple.groom.instagram)}
     </div>
     <div class="relative order-1 mx-auto w-60 sm:order-2 sm:mr-10">
       <h2
-        class="font-script mb-6 -rotate-6 text-center text-xl whitespace-nowrap sm:absolute sm:top-6 sm:-left-36 sm:z-10 sm:mb-0"
+        class="font-script mb-6 -rotate-6 text-center text-2xl whitespace-nowrap sm:absolute sm:top-6 sm:-left-32 sm:z-10 sm:mb-0"
       >
-        Detail Acara
+        {couple.groom.nickname}
       </h2>
       <figure class="relative bg-white p-2 pb-10 shadow-sm">
         <div class="tape"></div>
         <img
           src={right}
-          alt={couple.groom.nickname}
+          alt={couple.groom.fullName}
           class="aspect-[4/5] w-full object-cover object-top"
         />
       </figure>
     </div>
   </section>
 
-  <!-- Gifts / Prayer -->
-  <section class="mt-28 grid items-start gap-14 sm:grid-cols-[auto_1fr]">
+  <!-- Bride -->
+  <section class="mt-28 grid items-center gap-14 sm:grid-cols-[auto_1fr]">
     <div class="relative mx-auto w-60 sm:ml-10">
       <figure class="relative bg-white p-2 pb-10 shadow-sm">
         <div class="tape"></div>
         <img
           src={left}
-          alt={couple.bride.nickname}
+          alt={couple.bride.fullName}
           class="aspect-[4/5] w-full object-cover object-top"
         />
       </figure>
       <h2
-        class="font-script mt-6 -rotate-6 text-center text-xl whitespace-nowrap sm:absolute sm:top-6 sm:-right-44 sm:z-10 sm:mt-0"
+        class="font-script mt-6 -rotate-6 text-center text-2xl whitespace-nowrap sm:absolute sm:top-6 sm:-right-36 sm:z-10 sm:mt-0"
       >
-        {gifts ? "Tanda Kasih" : "Doa Kami"} ♡
+        {couple.bride.nickname} ♡
       </h2>
     </div>
-    <div class="max-w-md pt-4 sm:pt-16">
-      {#if gifts}
-        <p>
-          Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun apabila Anda ingin
-          memberikan tanda kasih, Anda dapat mengirimkannya melalui rekening berikut.
-        </p>
-        <ul class="mt-8 space-y-5">
-          {#each gifts as account (account.number)}
-            <li class="flex items-end justify-between gap-4 border-b border-neutral-400 pb-2">
-              <div>
-                <p class="label">{account.bank}</p>
-                <p class="text-sm font-bold tracking-wider">{account.number}</p>
-                <p class="text-[11px]">a.n. {account.holder}</p>
-              </div>
-              <button
-                type="button"
-                class="label shrink-0 cursor-pointer underline-offset-4 hover:underline"
-                onclick={() => copy(account.number)}
-              >
-                {copied === account.number ? "Tersalin ✓" : "Salin"}
-              </button>
-            </li>
-          {/each}
-        </ul>
-      {:else}
-        <p class="italic">
-          “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan
-          dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan
-          dijadikan-Nya di antaramu rasa kasih dan sayang.”
-        </p>
-        <p class="label mt-4">QS. Ar-Rum: 21</p>
-      {/if}
+    <div class="text-center sm:pl-10 sm:text-left">
+      <p class="label mb-3">Mempelai Wanita</p>
+      <p class="text-lg font-bold">{couple.bride.fullName}</p>
+      <p class="mt-4">{couple.bride.childOrder}</p>
+      <p>{couple.bride.parents}</p>
+      {@render instagram(couple.bride.instagram)}
     </div>
   </section>
+
+  <!-- Gifts (only for invitations with showGifts enabled) -->
+  {#if gifts}
+    <section class="mx-auto mt-28 max-w-md">
+      <h2 class="font-script mb-6 -rotate-3 text-center text-2xl">Tanda Kasih ♡</h2>
+      <p class="text-center">
+        Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun apabila Anda ingin
+        memberikan tanda kasih, Anda dapat mengirimkannya melalui rekening berikut.
+      </p>
+      <ul class="mt-8 space-y-5">
+        {#each gifts as account (account.number)}
+          <li class="flex items-end justify-between gap-4 border-b border-neutral-400 pb-2">
+            <div>
+              <p class="label">{account.bank}</p>
+              <p class="text-sm font-bold tracking-wider">{account.number}</p>
+              <p class="text-[11px]">a.n. {account.holder}</p>
+            </div>
+            <button
+              type="button"
+              class="label shrink-0 cursor-pointer underline-offset-4 hover:underline"
+              onclick={() => copy(account.number)}
+            >
+              {copied === account.number ? "Tersalin ✓" : "Salin"}
+            </button>
+          </li>
+        {/each}
+      </ul>
+    </section>
+  {/if}
 
   <!-- RSVP -->
   {#if guest}

@@ -1,14 +1,20 @@
 // Public wedding details shown on every invitation.
-// TODO: Replace the placeholder date, venues, and schedule with the real ones.
+// TODO: Replace the placeholder date and venues with the real ones.
 
 export const couple = {
   groom: {
-    fullName: "Achmad Chun Chun",
+    fullName: "Achmad Chun Chun, S.Kom.",
     nickname: "Achun",
+    childOrder: "Putra pertama dari",
+    parents: "Bapak Edi Harjito & Ibu Priyani",
+    instagram: "anonychun",
   },
   bride: {
-    fullName: "Dhona Siwi Kafnaeni",
+    fullName: "Dhona Siwi Kafnaeni, S.E.",
     nickname: "Dhona",
+    childOrder: "Putri kedua dari",
+    parents: "Bapak Sri Wiyono & Ibu Rosmayenti",
+    instagram: "dhonasiwi",
   },
 } as const
 
@@ -31,14 +37,4 @@ export const wedding = {
     address: ["Jl. Contoh No. 2", "Kota, Provinsi"],
     mapsUrl: "https://maps.google.com",
   },
-  itinerary: [
-    { time: "08.00", label: "Akad Nikah" },
-    { time: "09.30", label: "Ramah Tamah Keluarga" },
-    { time: "11.00", label: "Penyambutan Tamu" },
-    { time: "11.30", label: "Resepsi" },
-    { time: "12.30", label: "Hiburan & Makan Siang" },
-    { time: "13.30", label: "Sesi Foto Bersama" },
-    { time: "14.00", label: "Penutup" },
-  ],
-  attire: ["Pakaian batik atau formal.", "Nuansa warna netral dianjurkan."],
 } as const
