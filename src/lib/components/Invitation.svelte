@@ -1,8 +1,8 @@
 <script lang="ts">
   import { enhance } from "$app/forms"
-  import hero from "#lib/assets/hero.jpeg"
-  import left from "#lib/assets/left.jpg"
-  import right from "#lib/assets/right.jpg"
+  import hero from "#lib/assets/hero.webp"
+  import left from "#lib/assets/left.webp"
+  import right from "#lib/assets/right.webp"
   import Backsound from "#lib/components/Backsound.svelte"
   import { couple, wedding } from "#lib/wedding.ts"
 

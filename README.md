@@ -22,4 +22,4 @@ bun run dev
 
 - `src/lib/wedding.ts` — tanggal, lokasi akad & resepsi, susunan acara, busana.
 - `src/lib/server/gifts.ts` — daftar rekening (hanya dikirim ke browser bila `showGifts` aktif).
-- `src/lib/assets/` — foto `hero.jpeg`, `right.jpg` (Detail Acara), `left.jpg` (Tanda Kasih).
+- `src/lib/assets/` — foto `hero.webp`, `right.webp` (Detail Acara), `left.webp` (Tanda Kasih).
