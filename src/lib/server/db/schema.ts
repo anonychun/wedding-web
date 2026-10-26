@@ -1,10 +1,12 @@
+import { sql } from "drizzle-orm"
 import { boolean, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
 
 export const attendanceEnum = pgEnum("attendance", ["attending", "not_attending"])
 
-export const invitation = pgTable("invitation", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  /** Random, unguessable slug used in the invitation URL. Never derived from the guest name. */
+export const invitation = pgTable("invitations", {
+  id: uuid("id")
+    .primaryKey()
+    .default(sql`uuidv7()`),
   code: text("code").notNull().unique(),
   guestName: text("guest_name").notNull(),
   showGifts: boolean("show_gifts").notNull().default(false),
