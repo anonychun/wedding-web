@@ -1,56 +1,25 @@
-# sv
+# Undangan Pernikahan — Achun & Dhona
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+SvelteKit 3 + PostgreSQL (Drizzle ORM).
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Setup
 
 ```sh
-# create a new project
-npx sv create my-app
+cp .env.example .env   # isi DATABASE_URL & ADMIN_PASSWORD
+bun install
+bun run db:push        # buat tabel `invitation`
+bun run dev
 ```
 
-To recreate this project with the same configuration:
+## Cara pakai
 
-```sh
-# recreate this project
-bun x sv@1.1.1 create --template minimal --types ts --add tailwindcss="plugins:none" sveltekit-adapter="adapter:auto" drizzle="database:postgresql+postgresql:postgres.js+docker:no" --install bun wedding-web
-```
+1. Buka `/admin`, masuk dengan `ADMIN_PASSWORD`.
+2. Isi nama tamu, centang **Tampilkan rekening** jika undangan tersebut perlu menampilkan rekening hadiah, lalu **Buat undangan**.
+3. Bagikan link `/<kode>` ke tamu. Kode dibuat acak (10 karakter, kriptografis) dan tidak berhubungan dengan nama tamu — nama hanya diambil dari database, jadi mengubah URL tidak bisa mengubah nama.
+4. Tamu mengisi RSVP (hadir / tidak hadir + ucapan). Semua ucapan tampil di bagian **Ucapan & Doa**, dan rekapnya ada di `/admin`.
 
-## Adding features
+## Konfigurasi konten
 
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- `src/lib/wedding.ts` — tanggal, lokasi akad & resepsi, susunan acara, busana.
+- `src/lib/server/gifts.ts` — daftar rekening (hanya dikirim ke browser bila `showGifts` aktif).
+- `src/lib/assets/` — foto `hero.webp`, `right.webp` (Detail Acara), `left.webp` (Tanda Kasih).
