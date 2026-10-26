@@ -24,7 +24,6 @@ export const wedding = {
   /** ISO date of the wedding day. */
   date: "2026-11-01",
   dateLabel: "Minggu, 1 November 2026",
-  rsvpDeadline: "25 Oktober 2026",
   akad: {
     title: "Akad Nikah",
     time: "08.00 – 11.00 WIB",
@@ -39,4 +38,12 @@ export const wedding = {
     address: ["Kecamatan Mataram Baru", "Lampung Timur"],
     mapsUrl: mapsSearch("Jl. Simpang Sadar, Mataram Baru, Lampung Timur"),
   },
+} as const
+
+// Backsound played on the invitation pages. Drop an MP3 file at
+// `static/backsound.mp3` for this to work.
+export const song = {
+  title: "Jatuh Suka — Tulus",
+  url: "/backsound.mp3",
+  volume: 0.6,
 } as const

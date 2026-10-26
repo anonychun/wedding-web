@@ -3,6 +3,7 @@
   import hero from "#lib/assets/hero.jpeg"
   import left from "#lib/assets/left.jpg"
   import right from "#lib/assets/right.jpg"
+  import Backsound from "#lib/components/Backsound.svelte"
   import { couple, wedding } from "#lib/wedding.ts"
 
   type Attendance = "attending" | "not_attending"
@@ -225,8 +226,6 @@
     <section class="relative mx-auto mt-32 max-w-xl">
       <h2 class="-top-14 -left-2 sm:-left-16 z-10 absolute font-script text-5xl -rotate-6">RSVP</h2>
       <div class="bg-white shadow-sm px-6 sm:px-10 pt-14 pb-10">
-        <p class="mb-8 text-[11px] text-right">Mohon konfirmasi sebelum {wedding.rsvpDeadline}.</p>
-
         {#if showForm}
           <form
             method="POST"
@@ -342,4 +341,6 @@
     </p>
     <p class="mt-6 font-script text-xl">{couple.groom.nickname} &amp; {couple.bride.nickname}</p>
   </footer>
+
+  <Backsound />
 </div>
