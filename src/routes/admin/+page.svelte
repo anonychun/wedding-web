@@ -94,7 +94,7 @@
         />
       </label>
       <label class="flex items-center gap-2">
-        <input type="checkbox" name="showGifts" class="accent-ink" />
+        <input type="checkbox" name="showGifts" class="accent-ink" checked />
         Tampilkan rekening
       </label>
       <button class="label cursor-pointer bg-ink px-6 py-2 text-white">Buat undangan</button>
