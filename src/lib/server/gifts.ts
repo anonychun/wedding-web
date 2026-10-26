@@ -10,6 +10,6 @@ export type GiftAccount = {
 }
 
 export const giftAccounts: GiftAccount[] = [
-  { bank: "BCA", number: "0000000000", holder: "Achmad Chun Chun" },
-  { bank: "Mandiri", number: "0000000000000", holder: "Dhona Siwi Kafnaeni" },
+  { bank: "BRI", number: "0378 0105 0650 507", holder: "Achmad Chun Chun" },
+  { bank: "JAGO", number: "5034 7183 4874", holder: "Dhona Siwi Kafnaeni" },
 ]

@@ -26,8 +26,6 @@
 
   let { guest, gifts, wishes, form = null }: Props = $props()
 
-  const monogram = `${couple.groom.nickname[0]}&${couple.bride.nickname[0]}`
-
   let submitting = $state(false)
   let editing = $state(false)
   let copied = $state<string | null>(null)
@@ -47,10 +45,10 @@
 
 {#snippet instagram(handle: string)}
   <a
-    href="https://www.instagram.com/{handle}/"
+    href="https://www.instagram.com/{handle}"
     target="_blank"
     rel="noopener noreferrer"
-    class="mt-4 inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
+    class="inline-flex items-center gap-1.5 mt-4 hover:underline underline-offset-4"
   >
     <svg
       viewBox="0 0 24 24"
@@ -68,54 +66,22 @@
   </a>
 {/snippet}
 
-<div class="mx-auto max-w-5xl overflow-x-clip px-5 pb-24 text-[13px] leading-relaxed sm:px-10">
-  <!-- Header -->
-  <header class="flex flex-col gap-8 py-8 sm:flex-row sm:items-start sm:justify-between">
-    <a href="#top" class="font-script text-xl leading-tight">
-      <span class="block text-sm">Love,</span>
-      {monogram}
-    </a>
-    <div class="grid grid-cols-1 gap-6 text-[11px] sm:grid-cols-3 sm:gap-12">
-      <div>
-        <p class="label mb-2">Tanggal &amp; Waktu</p>
-        <p>{wedding.dateLabel}</p>
-        <p class="mt-2">Akad pukul {wedding.akad.time}</p>
-      </div>
-      {#each [wedding.akad, wedding.resepsi] as event (event.title)}
-        <div>
-          <p class="label mb-2">{event.title}</p>
-          <p>{event.venue}</p>
-          {#each event.address as line, i (i)}
-            <p class={i === 0 ? "mt-2" : ""}>{line}</p>
-          {/each}
-          <a
-            href={event.mapsUrl}
-            target="_blank"
-            rel="noopener"
-            class="mt-1 inline-block underline"
-          >
-            Lihat peta
-          </a>
-        </div>
-      {/each}
-    </div>
-  </header>
-
+<div class="mx-auto px-5 sm:px-10 pb-24 max-w-5xl overflow-x-clip text-[13px] leading-relaxed">
   <!-- Hero -->
-  <section id="top" class="relative mt-10 bg-white p-2 shadow-sm sm:p-3">
+  <section id="top" class="relative bg-white shadow-sm mt-16 p-2 sm:p-3">
     <div class="tape"></div>
     <img
       src={hero}
       alt="{couple.groom.nickname} &amp; {couple.bride.nickname}"
-      class="aspect-[1080/637] w-full object-cover"
+      class="w-full object-cover aspect-[1080/637]"
     />
     <div
-      class="flex flex-col gap-8 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+      class="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-8 px-4 sm:px-6 py-10"
     >
       <div class="max-w-sm">
         {#if guest}
-          <p class="label mb-1">Kepada Yth.</p>
-          <p class="mb-4 text-base font-bold">{guest.name}</p>
+          <p class="mb-1 label">Kepada Yth.</p>
+          <p class="mb-4 font-bold text-base">{guest.name}</p>
         {/if}
         <p class="mb-2 italic">Assalamu'alaikum Warohmatullahi Wabarokatuh</p>
         <p>
@@ -123,7 +89,7 @@
           pernikahan kami.
         </p>
       </div>
-      <div class="font-script -rotate-6 text-center text-lg sm:pr-10">
+      <div class="sm:pr-10 font-script text-lg text-center -rotate-6">
         <p class="text-base">Love,</p>
         <p>{couple.groom.nickname} &amp; {couple.bride.nickname}</p>
       </div>
@@ -131,76 +97,119 @@
   </section>
 
   <!-- Groom -->
-  <section class="mt-28 grid items-center gap-14 sm:grid-cols-[1fr_auto]">
-    <div class="order-2 text-center sm:order-1 sm:pl-10 sm:text-left">
-      <p class="label mb-3">Mempelai Pria</p>
-      <p class="text-lg font-bold">{couple.groom.fullName}</p>
+  <section class="items-center gap-14 grid sm:grid-cols-[1fr_auto] mt-28">
+    <div class="order-2 sm:order-1 sm:pl-10 sm:text-left text-center">
+      <p class="mb-3 label">Mempelai Pria</p>
+      <p class="font-bold text-lg">{couple.groom.fullName}</p>
       <p class="mt-4">{couple.groom.childOrder}</p>
       <p>{couple.groom.parents}</p>
       {@render instagram(couple.groom.instagram)}
     </div>
-    <div class="relative order-1 mx-auto w-60 sm:order-2 sm:mr-10">
+    <div class="relative order-1 sm:order-2 mx-auto sm:mr-10 w-60">
       <h2
-        class="font-script mb-6 -rotate-6 text-center text-2xl whitespace-nowrap sm:absolute sm:top-6 sm:-left-32 sm:z-10 sm:mb-0"
+        class="sm:top-6 sm:-left-32 sm:z-10 sm:absolute mb-6 sm:mb-0 font-script text-2xl text-center whitespace-nowrap -rotate-6"
       >
         {couple.groom.nickname}
       </h2>
-      <figure class="relative bg-white p-2 pb-10 shadow-sm">
+      <figure class="relative bg-white shadow-sm p-2 pb-10">
         <div class="tape"></div>
         <img
           src={right}
           alt={couple.groom.fullName}
-          class="aspect-[4/5] w-full object-cover object-top"
+          class="w-full object-cover object-top aspect-[4/5]"
         />
       </figure>
     </div>
   </section>
 
   <!-- Bride -->
-  <section class="mt-28 grid items-center gap-14 sm:grid-cols-[auto_1fr]">
-    <div class="relative mx-auto w-60 sm:ml-10">
-      <figure class="relative bg-white p-2 pb-10 shadow-sm">
+  <section class="items-center gap-14 grid sm:grid-cols-[auto_1fr] mt-28">
+    <div class="relative mx-auto sm:ml-10 w-60">
+      <h2
+        class="sm:top-6 sm:-right-36 sm:z-10 sm:absolute mb-6 sm:mb-0 font-script text-2xl text-center whitespace-nowrap -rotate-6"
+      >
+        {couple.bride.nickname} ♡
+      </h2>
+      <figure class="relative bg-white shadow-sm p-2 pb-10">
         <div class="tape"></div>
         <img
           src={left}
           alt={couple.bride.fullName}
-          class="aspect-[4/5] w-full object-cover object-top"
+          class="w-full object-cover object-top aspect-[4/5]"
         />
       </figure>
-      <h2
-        class="font-script mt-6 -rotate-6 text-center text-2xl whitespace-nowrap sm:absolute sm:top-6 sm:-right-36 sm:z-10 sm:mt-0"
-      >
-        {couple.bride.nickname} ♡
-      </h2>
     </div>
-    <div class="text-center sm:pl-10 sm:text-left">
-      <p class="label mb-3">Mempelai Wanita</p>
-      <p class="text-lg font-bold">{couple.bride.fullName}</p>
+    <div class="sm:pl-10 sm:text-left text-center">
+      <p class="mb-3 label">Mempelai Wanita</p>
+      <p class="font-bold text-lg">{couple.bride.fullName}</p>
       <p class="mt-4">{couple.bride.childOrder}</p>
       <p>{couple.bride.parents}</p>
       {@render instagram(couple.bride.instagram)}
     </div>
   </section>
 
+  <!-- Date & venues -->
+  <section class="mx-auto mt-28 max-w-3xl text-center">
+    <h2 class="mb-8 font-script text-2xl -rotate-3">Waktu &amp; Tempat</h2>
+    <p class="mb-2 label">Tanggal</p>
+    <p class="font-bold text-base">{wedding.dateLabel}</p>
+
+    <div class="gap-6 grid sm:grid-cols-2 mt-12">
+      {#each [wedding.akad, wedding.resepsi] as event (event.title)}
+        <div class="relative flex flex-col items-center bg-white shadow-sm px-6 pt-10 pb-8">
+          <div class="tape"></div>
+          <p class="label">{event.title}</p>
+          <p class="mt-2 font-bold text-base">{event.time}</p>
+          <div class="bg-neutral-300 my-5 w-10 h-px"></div>
+          <p class="font-bold">{event.venue}</p>
+          {#each event.address as line, i (i)}
+            <p class={i === 0 ? "mt-1" : ""}>{line}</p>
+          {/each}
+          <a
+            href={event.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:bg-ink mt-6 px-4 py-2 border border-ink hover:text-white transition-colors label"
+          >
+            Lihat peta
+          </a>
+        </div>
+      {/each}
+    </div>
+  </section>
+
+  <!-- Quran verse -->
+  <section class="mx-auto mt-28 max-w-xl text-center">
+    <div class="bg-neutral-300 mx-auto mb-8 w-10 h-px"></div>
+    <blockquote class="italic">
+      “Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu
+      dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu
+      rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat
+      tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.”
+    </blockquote>
+    <p class="mt-6 label">Q.S. Ar-Rum: 21</p>
+    <div class="bg-neutral-300 mx-auto mt-8 w-10 h-px"></div>
+  </section>
+
   <!-- Gifts (only for invitations with showGifts enabled) -->
   {#if gifts}
     <section class="mx-auto mt-28 max-w-md">
-      <h2 class="font-script mb-6 -rotate-3 text-center text-2xl">Tanda Kasih ♡</h2>
+      <h2 class="mb-6 font-script text-2xl text-center -rotate-3">Tanda Kasih ♡</h2>
       <p class="text-center">
         Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun apabila Anda ingin
         memberikan tanda kasih, Anda dapat mengirimkannya melalui rekening berikut.
       </p>
-      <ul class="mt-8 space-y-5">
+      <ul class="space-y-5 mt-8">
         {#each gifts as account (account.number)}
-          <li class="flex items-end justify-between gap-4 border-b border-neutral-400 pb-2">
+          <li class="flex justify-between items-end gap-4 pb-2 border-neutral-400 border-b">
             <div>
               <p class="label">{account.bank}</p>
-              <p class="text-sm font-bold tracking-wider">{account.number}</p>
+              <p class="font-bold text-sm tracking-wider">{account.number}</p>
               <p class="text-[11px]">a.n. {account.holder}</p>
             </div>
             <button
               type="button"
-              class="label shrink-0 cursor-pointer underline-offset-4 hover:underline"
+              class="hover:underline underline-offset-4 cursor-pointer label shrink-0"
               onclick={() => copy(account.number)}
             >
               {copied === account.number ? "Tersalin ✓" : "Salin"}
@@ -214,9 +223,9 @@
   <!-- RSVP -->
   {#if guest}
     <section class="relative mx-auto mt-32 max-w-xl">
-      <h2 class="font-script absolute -top-14 -left-2 z-10 -rotate-6 text-5xl sm:-left-16">RSVP</h2>
-      <div class="bg-white px-6 pt-14 pb-10 shadow-sm sm:px-10">
-        <p class="mb-8 text-right text-[11px]">Mohon konfirmasi sebelum {wedding.rsvpDeadline}.</p>
+      <h2 class="-top-14 -left-2 sm:-left-16 z-10 absolute font-script text-5xl -rotate-6">RSVP</h2>
+      <div class="bg-white shadow-sm px-6 sm:px-10 pt-14 pb-10">
+        <p class="mb-8 text-[11px] text-right">Mohon konfirmasi sebelum {wedding.rsvpDeadline}.</p>
 
         {#if showForm}
           <form
@@ -237,7 +246,7 @@
               <div class="flex flex-wrap gap-2">
                 {#each [["attending", "Ya, dengan senang hati"], ["not_attending", "Maaf, tidak bisa hadir"]] as [value, label] (value)}
                   <label
-                    class="cursor-pointer rounded-full border border-neutral-500 px-3 py-0.5 text-[11px] has-checked:bg-ink has-checked:text-white"
+                    class="has-checked:bg-ink px-3 py-0.5 border border-neutral-500 rounded-full text-[11px] has-checked:text-white cursor-pointer"
                   >
                     <input
                       type="radio"
@@ -255,7 +264,7 @@
 
             <div>
               <p>Nama</p>
-              <p class="border-b border-neutral-400 py-1 font-bold">{guest.name}</p>
+              <p class="py-1 border-neutral-400 border-b font-bold">{guest.name}</p>
             </div>
 
             <label class="block">
@@ -267,7 +276,7 @@
                 rows="3"
                 maxlength="1000"
                 value={guest.message ?? ""}
-                class="mt-1 block w-full resize-y border-0 border-b border-neutral-400 bg-transparent px-0 py-1 focus:border-ink focus:ring-0 focus:outline-none"
+                class="block bg-transparent mt-1 px-0 py-1 border-0 border-neutral-400 focus:border-ink border-b focus:outline-none focus:ring-0 w-full resize-y"
               ></textarea>
             </label>
 
@@ -278,7 +287,7 @@
             <button
               type="submit"
               disabled={submitting}
-              class="label w-full cursor-pointer bg-ink py-3 text-white disabled:opacity-60"
+              class="bg-ink disabled:opacity-60 py-3 w-full text-white cursor-pointer label"
             >
               {submitting ? "Mengirim..." : "Kirim"}
             </button>
@@ -294,7 +303,7 @@
             {/if}
             <button
               type="button"
-              class="label cursor-pointer underline"
+              class="underline cursor-pointer label"
               onclick={() => (editing = true)}
             >
               Ubah jawaban
@@ -308,13 +317,13 @@
   <!-- Wishes -->
   {#if wishes.length > 0}
     <section class="mx-auto mt-28 max-w-xl">
-      <h2 class="font-script mb-8 -rotate-3 text-center text-2xl">Ucapan &amp; Doa</h2>
-      <ul class="max-h-[32rem] space-y-6 overflow-y-auto pr-2">
+      <h2 class="mb-8 font-script text-2xl text-center -rotate-3">Ucapan &amp; Doa</h2>
+      <ul class="space-y-6 pr-2 max-h-[32rem] overflow-y-auto">
         {#each wishes as wish, i (i)}
-          <li class="border-b border-neutral-300 pb-4">
-            <div class="flex items-baseline justify-between gap-4">
+          <li class="pb-4 border-neutral-300 border-b">
+            <div class="flex justify-between items-baseline gap-4">
               <p class="font-bold">{wish.guestName}</p>
-              <span class="label shrink-0 text-neutral-500">{attendanceLabel(wish.attendance)}</span
+              <span class="text-neutral-500 label shrink-0">{attendanceLabel(wish.attendance)}</span
               >
             </div>
             {#if wish.message}
@@ -331,6 +340,6 @@
       Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan
       memberikan doa restu.
     </p>
-    <p class="font-script mt-6 text-xl">{couple.groom.nickname} &amp; {couple.bride.nickname}</p>
+    <p class="mt-6 font-script text-xl">{couple.groom.nickname} &amp; {couple.bride.nickname}</p>
   </footer>
 </div>

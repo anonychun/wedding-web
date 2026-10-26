@@ -1,5 +1,4 @@
 // Public wedding details shown on every invitation.
-// TODO: Replace the placeholder date and venues with the real ones.
 
 export const couple = {
   groom: {
@@ -18,23 +17,26 @@ export const couple = {
   },
 } as const
 
+const mapsSearch = (query: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+
 export const wedding = {
-  /** ISO date of the wedding day (used for countdown/calendar). */
-  date: "2026-06-14",
-  dateLabel: "Minggu, 14 Juni 2026",
-  rsvpDeadline: "31 Mei 2026",
+  /** ISO date of the wedding day. */
+  date: "2026-11-01",
+  dateLabel: "Minggu, 1 November 2026",
+  rsvpDeadline: "25 Oktober 2026",
   akad: {
     title: "Akad Nikah",
-    time: "08.00 WIB",
-    venue: "Nama Tempat Akad",
-    address: ["Jl. Contoh No. 1", "Kota, Provinsi"],
-    mapsUrl: "https://maps.google.com",
+    time: "08.00 – 11.00 WIB",
+    venue: "Jl. Ir Juanda",
+    address: ["Kecamatan Way Jepara", "Lampung Timur"],
+    mapsUrl: mapsSearch("Jl. Ir Juanda, Way Jepara, Lampung Timur"),
   },
   resepsi: {
     title: "Resepsi",
-    time: "11.00 – 14.00 WIB",
-    venue: "Nama Gedung Resepsi",
-    address: ["Jl. Contoh No. 2", "Kota, Provinsi"],
-    mapsUrl: "https://maps.google.com",
+    time: "11.00 WIB – Selesai",
+    venue: "Jl. Simpang Sadar",
+    address: ["Kecamatan Mataram Baru", "Lampung Timur"],
+    mapsUrl: mapsSearch("Jl. Simpang Sadar, Mataram Baru, Lampung Timur"),
   },
 } as const
