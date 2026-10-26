@@ -37,6 +37,8 @@ export const wedding = {
   },
 } as const
 
+export const shareBlurb = `Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restu. ${wedding.dateLabel}.`
+
 // Backsound played on the invitation pages.
 export const song = {
   url: "/backsound.mp3",

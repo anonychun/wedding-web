@@ -1,15 +1,19 @@
 <script lang="ts">
   import Invitation from "#lib/components/Invitation.svelte"
-  import { couple } from "#lib/wedding.ts"
+  import { couple, shareBlurb } from "#lib/wedding.ts"
   import type { PageProps } from "./$types"
 
   let { data, form }: PageProps = $props()
+
+  const title = $derived(
+    `Undangan untuk ${data.guest.name} · ${couple.groom.nickname} & ${couple.bride.nickname}`,
+  )
 </script>
 
 <svelte:head>
-  <title
-    >Undangan untuk {data.guest.name} · {couple.groom.nickname} &amp; {couple.bride.nickname}</title
-  >
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={shareBlurb} />
   <meta name="robots" content="noindex" />
 </svelte:head>
 
