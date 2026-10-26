@@ -74,7 +74,7 @@
     <img
       src={hero}
       alt="{couple.groom.nickname} &amp; {couple.bride.nickname}"
-      class="w-full object-cover aspect-[1080/637]"
+      class="w-full object-cover aspect-1080/637"
     />
     <div
       class="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-8 px-4 sm:px-6 py-10"
@@ -117,7 +117,7 @@
         <img
           src={right}
           alt={couple.groom.fullName}
-          class="w-full object-cover object-top aspect-[4/5]"
+          class="w-full object-cover object-top aspect-4/5"
         />
       </figure>
     </div>
@@ -136,7 +136,7 @@
         <img
           src={left}
           alt={couple.bride.fullName}
-          class="w-full object-cover object-top aspect-[4/5]"
+          class="w-full object-cover object-top aspect-4/5"
         />
       </figure>
     </div>
@@ -317,7 +317,7 @@
   {#if wishes.length > 0}
     <section class="mx-auto mt-28 max-w-xl">
       <h2 class="mb-8 font-script text-2xl text-center -rotate-3">Ucapan &amp; Doa</h2>
-      <ul class="space-y-6 pr-2 max-h-[32rem] overflow-y-auto">
+      <ul class="space-y-6 pr-2 max-h-128 overflow-y-auto">
         {#each wishes as wish, i (i)}
           <li class="pb-4 border-neutral-300 border-b">
             <div class="flex justify-between items-baseline gap-4">
